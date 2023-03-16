@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ouel-maj <ouel-maj@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/02 09:33:47 by ouel-maj          #+#    #+#             */
+/*   Updated: 2023/03/02 10:48:09 by ouel-maj         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../Incl/so_long.h"
 
 void	initialize(t_data *my_struct)
@@ -5,6 +17,7 @@ void	initialize(t_data *my_struct)
 	my_struct->check_e = 0;
 	my_struct->check_p = 0;
 	my_struct->coin = 0;
+	my_struct->coin2 = 0;
 	my_struct->move = 0;
 }
 

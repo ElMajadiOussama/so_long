@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ouel-maj <ouel-maj@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/02 09:33:10 by ouel-maj          #+#    #+#             */
+/*   Updated: 2023/03/02 09:47:51 by ouel-maj         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../Incl/so_long.h"
 
 int	error_display(int error_num, int nb_argc)
@@ -30,7 +42,7 @@ int	verif_ber(char *str)
 	}
 	else
 	{
-		printf("\nError\nLa map doit être de type .ber\n");
+		ft_printf("\nError\nLa map doit être de type .ber\n");
 		exit(EXIT_FAILURE);
 	}
 	return (1);

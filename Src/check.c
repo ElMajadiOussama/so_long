@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ouel-maj <ouel-maj@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/02 09:33:05 by ouel-maj          #+#    #+#             */
+/*   Updated: 2023/03/02 11:03:46 by ouel-maj         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../Incl/so_long.h"
 
 bool	check_walls(t_data my_struct)
@@ -80,16 +92,7 @@ bool	check_exit_player_coin(t_data *my_struct)
 		my_struct->y = -1;
 		while (++my_struct->y < my_struct->width)
 		{
-			if (my_struct->matrix[my_struct->x][my_struct->y] == 'P')
-			{
-				my_struct->i = my_struct->x;
-				my_struct->j = my_struct->y;
-				my_struct->check_p++;
-			}
-			if (my_struct->matrix[my_struct->x][my_struct->y] == 'E')
-				my_struct->check_e++;
-			if (my_struct->matrix[my_struct->x][my_struct->y] == 'C')
-				my_struct->coin++;
+			count_player_exit_coin(my_struct);
 		}
 	}
 	if (my_struct->check_p != 1 || my_struct->check_e != 1

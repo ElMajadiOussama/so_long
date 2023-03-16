@@ -6,7 +6,7 @@
 /*   By: ouel-maj <ouel-maj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 12:44:50 by ouel-maj          #+#    #+#             */
-/*   Updated: 2022/11/21 12:55:36 by ouel-maj         ###   ########.fr       */
+/*   Updated: 2023/03/16 10:33:02 by ouel-maj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ char	*ft_uitoa(unsigned int n)
 
 	len = ft_num_len(n);
 	num = (char *)malloc(sizeof (char) * len + 1);
+	if (!num)
+		return (0);
 	num[len] = '\0';
 	while (n != 0)
 	{

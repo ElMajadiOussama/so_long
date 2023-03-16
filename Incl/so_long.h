@@ -1,21 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ouel-maj <ouel-maj@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/02 09:34:37 by ouel-maj          #+#    #+#             */
+/*   Updated: 2023/03/02 11:05:43 by ouel-maj         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SO_LONG_H
 # define SO_LONG_H 
 
 # include "../mlx/mlx.h"
 # include "../libft/libft.h"
 # include "../ft_printf/ft_printf.h"
-# include <stdio.h>
-# include <fcntl.h>
 # include <stdlib.h>
-# include <unistd.h>
-# include <stdbool.h>
-
-# define X_EVENT_KEY_PRESS 2
+# include <fcntl.h>
 
 typedef struct t_data {
 	void	*mlx;
 	void	*win;
 	int		coin;
+	int		coin2;
 	int		check_e;
 	int		check_p;
 	int		i;
@@ -31,6 +39,7 @@ typedef struct t_data {
 	int		end;
 	char	**matrix;
 	char	**matrix_path_find;
+	char	**matrix_coin_find;
 	void	**path;
 	void	**img;
 	int		start;
@@ -63,7 +72,9 @@ int		path_find(t_data *my_struct, int i, int j);
 int		exit_window(t_data *my_struct);
 void	path_img(t_data *my_struct);
 void	move_right_utils(t_data *my_struct);
-// void	move_down_utils(t_data *my_struct);
-// void	move_up_utils(t_data *my_struct);
-// void	move_left_utils(t_data *my_struct);
+void	move_down_utils(t_data *my_struct);
+void	move_up_utils(t_data *my_struct);
+void	move_left_utils(t_data *my_struct);
+int		coin_find(t_data *my_struct, int i, int j);
+void	count_player_exit_coin(t_data *my_struct);
 #endif

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   move.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ouel-maj <ouel-maj@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/02 09:33:36 by ouel-maj          #+#    #+#             */
+/*   Updated: 2023/03/02 09:33:36 by ouel-maj         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../Incl/so_long.h"
 
 int	check(int keycode, t_data *my_struct)
@@ -31,11 +43,11 @@ void	move_right(t_data *my_struct)
 {
 	if (my_struct->matrix[my_struct->i][my_struct->j + 1] == '1')
 		return ;
-	else if (my_struct->matrix[my_struct->i][my_struct->j + 1] == 'C')
+	move_right_utils(my_struct);
+	if (my_struct->matrix[my_struct->i][my_struct->j + 1] == '0')
 	{
-		my_struct->coin--;
-		my_struct->matrix[my_struct->i][my_struct->j + 1] = 'P';
 		my_struct->matrix[my_struct->i][my_struct->j] = '0';
+		my_struct->matrix[my_struct->i][my_struct->j + 1] = 'P';
 	}
 	else if (my_struct->matrix[my_struct->i][my_struct->j + 1] == 'E'
 			&& my_struct->coin == 0)
@@ -45,22 +57,11 @@ void	move_right(t_data *my_struct)
 		my_struct->matrix[my_struct->i][my_struct->j + 1] = 'X';
 		my_struct->matrix[my_struct->i][my_struct->j] = '0';
 	}
-	else if (my_struct->matrix[my_struct->i][my_struct->j] == 'X')
-	{
-		my_struct->matrix[my_struct->i][my_struct->j + 1] = 'P';
-		my_struct->matrix[my_struct->i][my_struct->j] = 'E';
-	}
-	else if (my_struct->matrix[my_struct->i][my_struct->j] == 'X' && my_struct->matrix[my_struct->i][my_struct->j + 1] == 'C')
+	else if (my_struct->matrix[my_struct->i][my_struct->j + 1] == 'C')
 	{
 		my_struct->coin--;
 		my_struct->matrix[my_struct->i][my_struct->j + 1] = 'P';
-		my_struct->matrix[my_struct->i][my_struct->j] = 'E';
-	}
-	
-	else
-	{
 		my_struct->matrix[my_struct->i][my_struct->j] = '0';
-		my_struct->matrix[my_struct->i][my_struct->j + 1] = 'P';
 	}
 	my_struct->move++;
 	my_struct->j++;
@@ -70,11 +71,11 @@ void	move_left(t_data *my_struct)
 {
 	if (my_struct->matrix[my_struct->i][my_struct->j - 1] == '1')
 		return ;
-	else if (my_struct->matrix[my_struct->i][my_struct->j - 1] == 'C')
+	move_left_utils(my_struct);
+	if (my_struct->matrix[my_struct->i][my_struct->j - 1] == '0')
 	{
-		my_struct->coin--;
-		my_struct->matrix[my_struct->i][my_struct->j - 1] = 'P';
 		my_struct->matrix[my_struct->i][my_struct->j] = '0';
+		my_struct->matrix[my_struct->i][my_struct->j - 1] = 'P';
 	}
 	else if (my_struct->matrix[my_struct->i][my_struct->j - 1] == 'E'
 			&& my_struct->coin == 0)
@@ -84,15 +85,11 @@ void	move_left(t_data *my_struct)
 		my_struct->matrix[my_struct->i][my_struct->j - 1] = 'X';
 		my_struct->matrix[my_struct->i][my_struct->j] = '0';
 	}
-	else if (my_struct->matrix[my_struct->i][my_struct->j] == 'X')
+	else if (my_struct->matrix[my_struct->i][my_struct->j - 1] == 'C')
 	{
+		my_struct->coin--;
 		my_struct->matrix[my_struct->i][my_struct->j - 1] = 'P';
-		my_struct->matrix[my_struct->i][my_struct->j] = 'E';
-	}
-	else
-	{
 		my_struct->matrix[my_struct->i][my_struct->j] = '0';
-		my_struct->matrix[my_struct->i][my_struct->j - 1] = 'P';
 	}
 	my_struct->move++;
 	my_struct->j--;
@@ -102,11 +99,11 @@ void	move_up(t_data *my_struct)
 {
 	if (my_struct->matrix[my_struct->i - 1][my_struct->j] == '1')
 		return ;
-	else if (my_struct->matrix[my_struct->i - 1][my_struct->j] == 'C')
+	move_up_utils(my_struct);
+	if (my_struct->matrix[my_struct->i - 1][my_struct->j] == '0')
 	{
-		my_struct->coin--;
-		my_struct->matrix[my_struct->i - 1][my_struct->j] = 'P';
 		my_struct->matrix[my_struct->i][my_struct->j] = '0';
+		my_struct->matrix[my_struct->i - 1][my_struct->j] = 'P';
 	}
 	else if (my_struct->matrix[my_struct->i - 1][my_struct->j] == 'E'
 			&& my_struct->coin == 0)
@@ -116,15 +113,11 @@ void	move_up(t_data *my_struct)
 		my_struct->matrix[my_struct->i - 1][my_struct->j] = 'X';
 		my_struct->matrix[my_struct->i][my_struct->j] = '0';
 	}
-	else if (my_struct->matrix[my_struct->i][my_struct->j] == 'X')
+	else if (my_struct->matrix[my_struct->i - 1][my_struct->j] == 'C')
 	{
+		my_struct->coin--;
 		my_struct->matrix[my_struct->i - 1][my_struct->j] = 'P';
-		my_struct->matrix[my_struct->i][my_struct->j] = 'E';
-	}
-	else
-	{
 		my_struct->matrix[my_struct->i][my_struct->j] = '0';
-		my_struct->matrix[my_struct->i - 1][my_struct->j] = 'P';
 	}
 	my_struct->move++;
 	my_struct->i--;
@@ -134,11 +127,11 @@ void	move_down(t_data *my_struct)
 {
 	if (my_struct->matrix[my_struct->i + 1][my_struct->j] == '1')
 		return ;
-	else if (my_struct->matrix[my_struct->i + 1][my_struct->j] == 'C')
+	move_down_utils(my_struct);
+	if (my_struct->matrix[my_struct->i + 1][my_struct->j] == '0')
 	{
-		my_struct->coin--;
-		my_struct->matrix[my_struct->i + 1][my_struct->j] = 'P';
 		my_struct->matrix[my_struct->i][my_struct->j] = '0';
+		my_struct->matrix[my_struct->i + 1][my_struct->j] = 'P';
 	}
 	else if (my_struct->matrix[my_struct->i + 1][my_struct->j] == 'E'
 			&& my_struct->coin == 0)
@@ -148,132 +141,12 @@ void	move_down(t_data *my_struct)
 		my_struct->matrix[my_struct->i + 1][my_struct->j] = 'X';
 		my_struct->matrix[my_struct->i][my_struct->j] = '0';
 	}
-	else if (my_struct->matrix[my_struct->i][my_struct->j] == 'X')
+	else if (my_struct->matrix[my_struct->i + 1][my_struct->j] == 'C')
 	{
+		my_struct->coin--;
 		my_struct->matrix[my_struct->i + 1][my_struct->j] = 'P';
-		my_struct->matrix[my_struct->i][my_struct->j] = 'E';
-	}
-	else
-	{
 		my_struct->matrix[my_struct->i][my_struct->j] = '0';
-		my_struct->matrix[my_struct->i + 1][my_struct->j] = 'P';
 	}
 	my_struct->move++;
 	my_struct->i++;
 }
-
-// void	move_right(t_data *my_struct)
-// {
-// 	if (my_struct->matrix[my_struct->i][my_struct->j] == 'X')
-// 	{
-// 		my_struct->matrix[my_struct->i][my_struct->j] = 'E';
-// 		my_struct->matrix[my_struct->i][my_struct->j + 1] = 'P';
-// 	}
-// 	if (my_struct->matrix[my_struct->i][my_struct->j + 1] == '1')
-// 		return ;
-// 	else if (my_struct->matrix[my_struct->i][my_struct->j + 1] == 'C')
-// 	{
-// 		my_struct->coin--;
-// 		my_struct->matrix[my_struct->i][my_struct->j] = '0';
-// 		my_struct->matrix[my_struct->i][my_struct->j + 1] = 'P';
-// 	}
-// 	else if (my_struct->matrix[my_struct->i][my_struct->j + 1] == 'E'
-// 			&& my_struct->coin == 0)
-// 		return (quit(my_struct));
-// 	else if (my_struct->matrix[my_struct->i][my_struct->j + 1] == 'E')
-// 	{
-// 		my_struct->matrix[my_struct->i][my_struct->j] = '0';
-// 		my_struct->matrix[my_struct->i][my_struct->j + 1] = 'X';
-// 	}
-// 	else
-// 		move_right_utils(my_struct);
-// 	my_struct->move++;
-// 	my_struct->j++;
-// }
-
-// void	move_left(t_data *my_struct)
-// {
-// 	if (my_struct->matrix[my_struct->i][my_struct->j] == 'X')
-// 	{
-// 		my_struct->matrix[my_struct->i][my_struct->j] = 'E';
-// 		my_struct->matrix[my_struct->i][my_struct->j - 1] = 'P';
-// 	}
-// 	if (my_struct->matrix[my_struct->i][my_struct->j - 1] == '1')
-// 		return ;
-// 	else if (my_struct->matrix[my_struct->i][my_struct->j - 1] == 'C')
-// 	{
-// 		my_struct->coin--;
-// 		my_struct->matrix[my_struct->i][my_struct->j - 1] = 'P';
-// 		my_struct->matrix[my_struct->i][my_struct->j] = '0';
-// 	}
-// 	else if (my_struct->matrix[my_struct->i][my_struct->j - 1] == 'E'
-// 			&& my_struct->coin == 0)
-// 		return (quit(my_struct));
-// 	else if (my_struct->matrix[my_struct->i][my_struct->j - 1] == 'E')
-// 	{
-// 		my_struct->matrix[my_struct->i][my_struct->j] = '0';
-// 		my_struct->matrix[my_struct->i][my_struct->j - 1] = 'X';
-// 	}
-// 	else
-// 		move_left_utils(my_struct);
-// 	my_struct->move++;
-// 	my_struct->j--;
-// }
-
-// void	move_up(t_data *my_struct)
-// {
-// 	if (my_struct->matrix[my_struct->i - 1][my_struct->j] == '1')
-// 		return ;
-// 	else if (my_struct->matrix[my_struct->i - 1][my_struct->j] == 'C')
-// 	{
-// 		my_struct->coin--;
-// 		my_struct->matrix[my_struct->i][my_struct->j] = '0';
-// 		my_struct->matrix[my_struct->i - 1][my_struct->j] = 'P';
-// 	}
-// 	else if (my_struct->matrix[my_struct->i - 1][my_struct->j] == 'E'
-// 			&& my_struct->coin == 0)
-// 		return (quit(my_struct));
-// 	else if (my_struct->matrix[my_struct->i - 1][my_struct->j] == 'E')
-// 	{
-// 		my_struct->matrix[my_struct->i - 1][my_struct->j] = 'X';
-// 		my_struct->matrix[my_struct->i][my_struct->j] = '0';
-// 	}
-// 	else if (my_struct->matrix[my_struct->i][my_struct->j] == 'X')
-// 	{
-// 		my_struct->matrix[my_struct->i - 1][my_struct->j] = 'P';
-// 		my_struct->matrix[my_struct->i][my_struct->j] = 'E';
-// 	}
-// 	else
-// 		move_up_utils(my_struct);
-// 	my_struct->move++;
-// 	my_struct->i--;
-// }
-
-// void	move_down(t_data *my_struct)
-// {
-// 	if (my_struct->matrix[my_struct->i + 1][my_struct->j] == '1')
-// 		return ;
-// 	else if (my_struct->matrix[my_struct->i + 1][my_struct->j] == 'C')
-// 	{
-// 		my_struct->coin--;
-// 		my_struct->matrix[my_struct->i][my_struct->j] = '0';
-// 		my_struct->matrix[my_struct->i + 1][my_struct->j] = 'P';
-// 	}
-// 	else if (my_struct->matrix[my_struct->i + 1][my_struct->j] == 'E'
-// 			&& my_struct->coin == 0)
-// 		return (quit(my_struct));
-// 	else if (my_struct->matrix[my_struct->i + 1][my_struct->j] == 'E')
-// 	{
-// 		my_struct->matrix[my_struct->i + 1][my_struct->j] = 'X';
-// 		my_struct->matrix[my_struct->i][my_struct->j] = '0';
-// 	}
-// 	else if (my_struct->matrix[my_struct->i][my_struct->j] == 'X')
-// 	{
-// 		my_struct->matrix[my_struct->i + 1][my_struct->j] = 'P';
-// 		my_struct->matrix[my_struct->i][my_struct->j] = 'E';
-// 	}
-// 	else
-// 		move_down_utils(my_struct);
-// 	my_struct->move++;
-// 	my_struct->i++;
-// }

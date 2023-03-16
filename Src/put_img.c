@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   put_img.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ouel-maj <ouel-maj@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/02 09:32:41 by ouel-maj          #+#    #+#             */
+/*   Updated: 2023/03/02 09:32:44 by ouel-maj         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../Incl/so_long.h"
 
 void	path_img(t_data *my_struct)
@@ -32,7 +44,7 @@ void	create_img(t_data *my_struct)
 		|| !my_struct->img[3] || !my_struct->img[4] || !my_struct->img[5])
 	{
 		destroy_img(my_struct);
-		printf("%s", "Error\n");
+		ft_printf("%s", "Error\n");
 		exit(EXIT_FAILURE);
 	}
 }
